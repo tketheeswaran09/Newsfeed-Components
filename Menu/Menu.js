@@ -36,24 +36,39 @@ let menuItems = [
 
 //Step 1
 
-function menuComponentMaker(dataArr) {
-
+// 0-Create component function
+function menuCreator(menuList) {
+  //1-Create HTML markup
   const menu = document.createElement('div');
-  const menuList = document.createElement('ul');
-  menu.classList.add('menu');
-  menu.appendChild(menuList);
+  const list = document.createElement('ul');
 
-  dataArr.forEach((item) => {
-    const listItem = document.createElement('li');
-    listItem.innerText = item;
-    menuList.appendChild(listItem);
+  //2-Define HTML structure
+  menu.append(list);
+
+  //3-Add CSS styles using classes
+  menu.classList.add('menu');
+  menu.classList.add('menu--open');
+  list.classList.add('ul');
+
+  //4-Configure text/img content
+
+  //5-Add functionality
+  menuButton.addEventListener('click', () => {
+    // toggle the toggle class on the menu
+    menu.classList.toggle('menu--open');
   });
 
+  //6-Generate new elements from data
+  menuList.forEach(element => {
+    let li = document.createElement('li');
+    list.append(li);
+    li.textContent = element;
+  })
+
   return menu;
-
 }
+//Selecting the container where we want to add our components to
+const menuButton = document.querySelector('.header');
 
-menuComponent = menuComponentMaker(menuItems);
 
-
-console.log(menuComponent.classList);
+menuButton.append(menuCreator(menuItems));
